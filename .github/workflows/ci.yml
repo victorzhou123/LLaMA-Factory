@@ -27,5 +27,11 @@ jobs:
           docker version
           ls
           docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
-          docker build . --file ./docker/docker-rocm/Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/vicblog/llama-factory:latest
+          docker build . --file ./docker/docker-rocm/Dockerfile \
+          --build-arg INSTALL_BNB=false \
+          --build-arg INSTALL_VLLM=false \
+          --build-arg INSTALL_DEEPSPEED=false \
+          --build-arg INSTALL_FLASHATTN=false \
+          --build-arg PIP_INDEX=https://pypi.org/simple \
+          --tag registry.cn-hangzhou.aliyuncs.com/vicblog/llama-factory:latest
           docker push registry.cn-hangzhou.aliyuncs.com/vicblog/llama-factory:latest
