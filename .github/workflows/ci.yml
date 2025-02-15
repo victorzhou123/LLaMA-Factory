@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build the Docker image
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        run: |
+          docker version
+          docker login --username=维克多victorz registry.cn-hangzhou.aliyuncs.com
+          docker build . --file /docker/docker-rocm/Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/vicblog/llama-factory:latest
+          docker push registry.cn-hangzhou.aliyuncs.com/vicblog/llama-factory:latest
