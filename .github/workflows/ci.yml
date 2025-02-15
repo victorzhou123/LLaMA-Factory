@@ -19,5 +19,5 @@ jobs:
         run: |
           docker version
           docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
-          docker build . --file ./docker/docker-rocm/Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/vicblog/llama-factory:latest
+          docker build . --file ./LLaMA-Factory/docker/docker-rocm/Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/vicblog/llama-factory:latest
           docker push registry.cn-hangzhou.aliyuncs.com/vicblog/llama-factory:latest
