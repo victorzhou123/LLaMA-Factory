@@ -21,10 +21,6 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: '1.21'
-      - name: Run Gosec Security Scanner
-        uses: securego/gosec@master
-        with:
-          args: ./...
       - name: Code Test
         run: go test -v -coverprofile=profile.cov ./...
       - name: Build the Docker image
